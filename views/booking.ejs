@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Booking</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: rgb(255, 218, 138);">
+      <div class="container">
+        <a class="navbar-brand" href="/">Restaurang</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/booking_history">Booking History</a>
+            </li>
+            <% if (user_username) { %> 
+            <li class="nav-item">
+              <a class="nav-link" href="/profile">User : <%= user_username %> </a>
+            </li>
+            <% } %> 
+          </ul>
+          <form class="d-flex">
+            <% if (user_id){ %> 
+              <a href="/logout"><button class="btn btn-danger me-2" type="button">logout</button></a>
+            <% } else { %> 
+            <a href="/login"><button class="btn btn-outline-success me-2" type="button">Login</button></a>
+            <a href="/register"><button class="btn btn-outline-primary" type="button">Register</button></a>
+            <% } %> 
+          </form>
+        </div>
+      </div>
+    </nav>
+
+<div class="container-fluid">
+      <div class="row" style="margin-top: 13rem;">
+        <div class="col-4">
+
+        </div>
+        <div class="col-4 p-4 bg-light rounded-3 shadow-sm">
+          <% if(messages.error) { %>
+            <div class="alert alert-danger" role="alert"><%= messages.error %></div>
+          <% } %>
+          <% if(messages.success) { %>
+            <div class="alert alert-success" role="alert"><%= messages.success %></div>
+          <% } %>
+          <form action="/booking/<%= id %> " method="post">
+              <div class="mb-3">
+                  <h1 style="text-align: center;">จองโต๊ะ</h1>
+                  <h3 style="text-align: center;">ร้าน <%= name %> </h3>
+                  <p style="text-align: right;">user : <%= user_username %></p>
+                  <p style="text-align: right;">phone : <%= user_phone %></p>
+                  <h4 style="text-align: center;">โต๊ะ 6 - 8 คน</h4>
+                  <label for="form-select" class="form-label">จำนวนโต๊ะ : </label>
+                <select class="form-select" name="tableNumber" aria-label="Default select example" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                  </select>
+              </div>
+              <div class="mb-3">
+                <label for="date" class="form-label">วันที่ : </label>
+                <input type="date" name="atDate" required>
+                <label for="appt">เวลา : </label>
+                <input type="time" id="appt" name="atTime" required>
+              </div>
+              <button type="submit" class="btn btn-primary"  style="width: 7rem;">จอง</button>
+            </form>
+      </div>
+      <div class="col-4">
+
+      </div>
+
+    </div>
+</div>
+      
+    <footer class="footer">
+      <div class="container">
+        <span class="text-muted">© 2022 Copyright: restaurant.com</span>
+      </div>
+    </footer>
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </body>
+</html>
